@@ -6,5 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='Logout'),
-    path('veiculo/', include('veiculos.urls'), name='veiculo')
+    path('veiculos/', include('veiculos.urls'), name='veiculos')
 ]
