@@ -1,4 +1,4 @@
-#!/home/victhor/web_mobile/venv/bin/python
+#!/home/victhor/disciplinas/webMobile/web_mobile/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

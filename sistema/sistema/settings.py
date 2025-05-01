@@ -78,9 +78,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sistema',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5433',
+        'PASSWORD': 'admin1234',
+        'HOST': '172.31.240.1',
+        'PORT': '5432',
     }
 }
 
@@ -119,8 +119,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR /'static'
+STATIC_URL = '/static/'
+# STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [BASE_DIR/'sistema'/'static']
 
 # Default primary key field type
