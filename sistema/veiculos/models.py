@@ -8,3 +8,7 @@ class Veiculo(models.Model):
     ano = models.IntegerField()
     cor = models.SmallIntegerField(choices=OPCOES_CORES)
     combustivel = models.SmallIntegerField(choices=OPCOES_COMBUSTIVEIS)
+    foto = models.ImageField(blank=True, null= True, upload_to='veiculos/fotos')
+
+    class Meta:
+        ordering = ('-id',)

@@ -4,11 +4,13 @@
 {% block content %}
 
 <div class="container mt-4">
+  <h1>Conheça nossos veículos</h1>
+  <hr class="">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
     {% for veiculo in veiculos %}
       <div class="col">
         <div class="card h-100">
-          <img src="#" class="card-img-top" alt="Imagem do veículo">
+          <img src="{% url 'fotos-veiculo' veiculo.foto.name|cut:'veiculos/fotos/'%}" class="card-img-top img-padronizada" alt="Imagem do veículo">
           <div class="card-body">
             <h5 class="card-title">{{ veiculo.get_marca_display }} {{ veiculo.modelo }}</h5>
             <p class="card-text">Ano: {{ veiculo.ano }}</p>

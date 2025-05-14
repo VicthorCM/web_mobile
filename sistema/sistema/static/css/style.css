@@ -1,3 +1,10 @@
 .navbar-custom{
     background-color: #1a7ab2 !important;
 }
+
+.img-padronizada {
+  height: 200px;
+  width: 300px;
+  object-fit: cover;
+}
+
