@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container my-5">
+        <h1 class="mb-4 text-center">Lista de Anúncios</h1>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for anuncio in anuncios %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm position-relative">
+                        {% if anuncio.veiculo.foto %}
+                            <img src="{{ anuncio.veiculo.foto.url }}" class="card-img-top" alt="Foto do veículo {{ anuncio.veiculo.marca }} {{ anuncio.veiculo.modelo }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x200?text=Sem+Foto" class="card-img-top" alt="Sem foto disponível">
+                        {% endif %}
+                        {% if anuncio.veiculo.veiculo_novo %}
+                            <span class="badge bg-success badge-new">Novo</span>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ anuncio.veiculo.get_marca_display }} {{ anuncio.veiculo.modelo }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">R$ {{ anuncio.preco|floatformat:0 }}</h6>
+                            <ul class="list-unstyled">
+                                <li><strong>Ano:</strong> {{ anuncio.veiculo.ano }}</li>
+                                <li><strong>Cor:</strong> {{ anuncio.veiculo.get_cor_display }}</li>
+                                <li><strong>Combustível:</strong> {{ anuncio.veiculo.get_combustivel_display }}</li>
+                                <li><strong>Anos de uso:</strong> {{ anuncio.veiculo.anos_de_uso }}</li>
+                            </ul>
+                            <p class="card-text">
+                                {% if anuncio.descricao %}
+                                    {{ anuncio.descricao|truncatewords:15 }}
+                                {% else %}
+                                    Sem descrição disponível.
+                                {% endif %}
+                            </p>
+                            <p class="card-text"><small class="text-muted">Criado em: {{ anuncio.data_criacao|date:"d/m/Y H:i" }}</small></p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <a href="{% url 'detalhe_anuncio' anuncio.id %}" class="btn btn-primary w-100">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col">
+                    <div class="alert alert-info text-center" role="alert">
+                        Nenhum anúncio encontrado.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+
+{%endblock%}

@@ -5,11 +5,23 @@ from django.http import FileResponse, Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.generics import ListAPIView
+from .serializers import SerializadorVeiculo
+from rest_framework. permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 class ListarVeiculos(LoginRequiredMixin,ListView):
     model = Veiculo
     context_object_name = 'veiculos'
     template_name = 'veiculos/listar.html'
+
+class ListarAPIVeiculos(ListAPIView):
+    serializer_class = SerializadorVeiculo
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Veiculo.objects.all()
 
 class CadastrarVeiculos(LoginRequiredMixin,CreateView):
     model = Veiculo

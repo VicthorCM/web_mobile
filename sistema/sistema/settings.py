@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-s7n=$6rb7r8(2-!x9u2lk4+hw^@4qf3*0ed!9-la1l#fdoeih-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'veiculos.apps.VeiculosConfig',
     'anuncios.apps.AnunciosConfig',
+    'corsheaders',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -49,7 +52,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 ROOT_URLCONF = 'sistema.urls'
 
@@ -133,3 +144,5 @@ MEDIA_URL = '/fotos/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '')
 
 LOGIN_URL = '/'
+
+CORS_ORIGIN_ALLOW_ALL = True
