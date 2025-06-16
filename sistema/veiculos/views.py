@@ -5,7 +5,7 @@ from django.http import FileResponse, Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, DestroyAPIView
 from .serializers import SerializadorVeiculo
 from rest_framework. permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
@@ -43,6 +43,13 @@ class ExcluirVeiculos (LoginRequiredMixin,DeleteView):
     template_name = 'alert.html'
     success_url = reverse_lazy('listar-veiculos') 
 
+class DeleteAPIVeiculos(DestroyAPIView):
+    serializer_class = SerializadorVeiculo
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Veiculo.objects.all()
 class FotosVeiculo(View):
     def get(self,request,arquivo):
         try:
